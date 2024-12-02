@@ -1,1 +1,1 @@
-# FD2
+# Personal Finance Tracker with Budgeting and Analysis
