@@ -32,3 +32,46 @@ To get a local copy up and running, follow these steps:
 
    ```bash
    git clone https://github.com/yourusername/CRYPTO_KNIGHTS.git
+
+2. Navigate to the project directory:
+   ```bash
+   cd CRYPTO_KNIGHTS
+
+4. Install the dependencies:
+   ```bash
+   npm install
+
+6. Run the development server:
+   ```bash
+   npm run dev
+   
+
+8. Open your browser and go to http://localhost:3000 to see the application in action.
+
+
+### Usage
+
+- Create an account or log in to start tracking your finances.
+- Add transactions and categorize them for better management.
+- Set budgets for different categories and monitor your spending.
+- View insights and analytics to help you make informed financial decisions.
+
+### Contributing
+
+- Contributions are welcome! 
+- If you have suggestions for improvements or new features,
+- please fork the repository and submit a pull request.
+- Fork the projectCreate your feature branch (git checkout -b feature/YourFeature)
+- Commit your changes (git commit -m 'Add some feature')
+- Push to the branch (git push origin feature/YourFeature)
+- Open a pull request
+
+### License
+
+- Distributed under the MIT License. 
+- See LICENSE for more information.
+
+### Acknowledgments
+
+- Inspiration from various personal finance applications.
+- Thanks to the open-source community for their contributions and support.
