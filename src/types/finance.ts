@@ -3,18 +3,20 @@ export interface Transaction {
   amount: number;
   category: string;
   description: string;
-  date: Date;
+  date: string;
   type: 'income' | 'expense';
 }
 
 export interface Budget {
-  category: string;
-  limit: number;
-  spent: number;
-}
-
-export interface SpendingByCategory {
+  id: string;
   category: string;
   amount: number;
-  percentage: number;
+  spent: number;
+  period: 'monthly' | 'yearly';
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  color: string;
 }

@@ -1,35 +1,25 @@
 import React, { useState } from 'react';
 import { PlusCircle } from 'lucide-react';
+import { useFinanceStore } from '../store/useFinanceStore';
 
-interface TransactionFormProps {
-  onAddTransaction: (transaction: any) => void;
-}
-
-const categories = [
-  'Food & Dining',
-  'Transportation',
-  'Shopping',
-  'Bills & Utilities',
-  'Entertainment',
-  'Healthcare',
-  'Income'
-];
-
-export const TransactionForm: React.FC<TransactionFormProps> = ({ onAddTransaction }) => {
+export function TransactionForm() {
+  const { addTransaction, categories } = useFinanceStore();
   const [formData, setFormData] = useState({
     amount: '',
     category: '',
     description: '',
-    type: 'expense'
+    type: 'expense',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onAddTransaction({
-      ...formData,
+    addTransaction({
       id: Date.now().toString(),
-      amount: parseFloat(formData.amount),
-      date: new Date()
+      amount: Number(formData.amount),
+      category: formData.category,
+      description: formData.description,
+      date: new Date().toISOString(),
+      type: formData.type as 'income' | 'expense',
     });
     setFormData({ amount: '', category: '', description: '', type: 'expense' });
   };
@@ -47,10 +37,8 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onAddTransacti
           >
             <option value="expense">Expense</option>
             <option value="income">Income</option>
-            <option value="salary">Salary</option>
           </select>
         </div>
-        
         <div>
           <label className="block text-sm font-medium text-gray-700">Amount</label>
           <input
@@ -61,7 +49,6 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onAddTransacti
             required
           />
         </div>
-
         <div>
           <label className="block text-sm font-medium text-gray-700">Category</label>
           <select
@@ -71,12 +58,13 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onAddTransacti
             required
           >
             <option value="">Select category</option>
-            {categories.map(category => (
-              <option key={category} value={category}>{category}</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.name}>
+                {category.name}
+              </option>
             ))}
           </select>
         </div>
-
         <div>
           <label className="block text-sm font-medium text-gray-700">Description</label>
           <input
@@ -87,10 +75,9 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onAddTransacti
             required
           />
         </div>
-
         <button
           type="submit"
-          className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
         >
           <PlusCircle className="w-4 h-4 mr-2" />
           Add Transaction
@@ -98,4 +85,4 @@ export const TransactionForm: React.FC<TransactionFormProps> = ({ onAddTransacti
       </div>
     </form>
   );
-};
+}

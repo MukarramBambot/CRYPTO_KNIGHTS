@@ -1,8 +1,5 @@
 {
-  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "composite": true,
-    // other options can be added here if needed
     "target": "ES2022",
     "lib": ["ES2023"],
     "module": "ESNext",
@@ -13,7 +10,7 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "jsx": "react-jsx",
+    "noEmit": true,
 
     /* Linting */
     "strict": true,
@@ -21,7 +18,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "src/**/*"
-  ]
+  "include": ["vite.config.ts"]
 }

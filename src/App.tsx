@@ -1,59 +1,40 @@
-import React, { useState } from 'react';
-import { Transaction, Budget } from './types/finance';
-import { Dashboard } from './components/Dashboard';
+import React from 'react';
 import { TransactionForm } from './components/TransactionForm';
+import { BudgetForm } from './components/BudgetForm';
 import { TransactionList } from './components/TransactionList';
-import { AIInsights } from './components/AIInsights';
-import { BudgetManager } from './components/BudgetManager';
-import { TrendAnalysis } from './components/TrendAnalysis';
+import { BudgetOverview } from './components/BudgetOverview';
+import { FinancialAnalysis } from './components/FinancialAnalysis';
+import { AIAdvisor } from './components/AIAdvisor';
+import { Wallet } from 'lucide-react';
 
 function App() {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [budgets, setBudgets] = useState<Budget[]>([]);
-
-  const handleAddTransaction = (transaction: Transaction) => {
-    setTransactions([transaction, ...transactions]);
-  };
-
-  const handleAddBudget = (budget: Budget) => {
-    setBudgets([...budgets, budget]);
-  };
-
   return (
     <div className="min-h-screen bg-gray-100">
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Personal Finance Tracker</h1>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            <Dashboard transactions={transactions} />
-          </div>
-          
-          <div>
-            <TransactionForm onAddTransaction={handleAddTransaction} />
-          </div>
-
-          <div className="lg:col-span-3">
-            <TrendAnalysis transactions={transactions} />
-          </div>
-
-          <div className="lg:col-span-2">
-            <BudgetManager 
-              transactions={transactions}
-              budgets={budgets}
-              onAddBudget={handleAddBudget}
-            />
-          </div>
-
-          <div className="lg:col-span-1">
-            <AIInsights transactions={transactions} />
-          </div>
-          
-          <div className="lg:col-span-3">
-            <TransactionList transactions={transactions} />
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+          <div className="flex items-center">
+            <Wallet className="w-8 h-8 text-blue-600 mr-3" />
+            <h1 className="text-2xl font-bold text-gray-900">Personal Finance Tracker</h1>
           </div>
         </div>
-      </div>
+      </header>
+
+      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="space-y-6">
+            <TransactionForm />
+            <BudgetForm />
+          </div>
+          <div className="space-y-6">
+            <TransactionList />
+            <AIAdvisor />
+          </div>
+          <div className="space-y-6">
+            <BudgetOverview />
+            <FinancialAnalysis />
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
